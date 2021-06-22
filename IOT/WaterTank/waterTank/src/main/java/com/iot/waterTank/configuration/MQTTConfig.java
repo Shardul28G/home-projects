@@ -1,11 +1,15 @@
 package com.iot.waterTank.configuration;
 
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
+import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +43,15 @@ public class MQTTConfig {
 		options.setCleanSession(true);
 		options.setConnectionTimeout(10);
 		publisher.connect(options);
+		
+		publisher.subscribe("test", new IMqttMessageListener() {
+            public void messageArrived (final String topic, final MqttMessage message) throws Exception {
+                final String payload = new String(message.getPayload());
+
+                System.out.println("Received operation " + payload);
+                
+            }
+		});
 		
 		return publisher;
 	}
