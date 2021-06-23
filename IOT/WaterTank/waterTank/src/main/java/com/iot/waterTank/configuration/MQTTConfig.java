@@ -44,14 +44,7 @@ public class MQTTConfig {
 		options.setConnectionTimeout(10);
 		publisher.connect(options);
 		
-		publisher.subscribe("test", new IMqttMessageListener() {
-            public void messageArrived (final String topic, final MqttMessage message) throws Exception {
-                final String payload = new String(message.getPayload());
-
-                System.out.println("Received operation " + payload);
-                
-            }
-		});
+		
 		
 		return publisher;
 	}

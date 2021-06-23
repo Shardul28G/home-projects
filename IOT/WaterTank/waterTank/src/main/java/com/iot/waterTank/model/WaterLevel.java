@@ -9,30 +9,32 @@ public class WaterLevel {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Integer large_tank_level;
+	private Integer id;
 	
-	private Integer small_tank_level;
+	private Integer tank_level;
 
-	public Integer getLarge_tank_level() {
-		return large_tank_level;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setLarge_tank_level(Integer large_tank_level) {
-		this.large_tank_level = large_tank_level;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public Integer getSmall_tank_level() {
-		return small_tank_level;
+	public Integer getTank_level() {
+		return tank_level;
 	}
 
-	public void setSmall_tank_level(Integer small_tank_level) {
-		this.small_tank_level = small_tank_level;
+	public void setTank_level(Integer tank_level) {
+		this.tank_level = tank_level;
 	}
 
 	@Override
 	public String toString() {
-		return "WaterLevel [large_tank_level=" + large_tank_level + ", small_tank_level=" + small_tank_level + "]";
+		return "WaterLevel [id=" + id + ", tank_level=" + tank_level + "]";
 	}
+
+	
 	
 	
 	
