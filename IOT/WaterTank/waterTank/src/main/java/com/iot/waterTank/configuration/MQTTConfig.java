@@ -33,7 +33,7 @@ public class MQTTConfig {
 	@Bean
 	public IMqttClient connectToMqttServer() throws MqttException
 	{
-		String publisherId = UUID.randomUUID().toString();
+		String publisherId = "JavaWebServer";
 		IMqttClient publisher = new MqttClient(mqtthost,publisherId);
 		
 		MqttConnectOptions options = new MqttConnectOptions();
