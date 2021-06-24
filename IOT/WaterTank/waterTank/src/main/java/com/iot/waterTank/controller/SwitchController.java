@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iot.waterTank.globalVaraibles.GlobalVariables;
-import com.iot.waterTank.model.Switch;
+import com.iot.waterTank.mysql.model.Switch;
 
 @Controller
 public class SwitchController {
