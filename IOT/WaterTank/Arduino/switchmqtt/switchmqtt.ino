@@ -11,7 +11,7 @@ const char* password = "27221020";
 
 
 const char *mqtt_broker = "192.168.0.115";
-const char *topic = "test";
+const char *topic = "switch";
 const char *mqtt_username = "mqttuser";
 const char *mqtt_password = "mqttuser";
 const int mqtt_port = 1883;
@@ -63,11 +63,31 @@ void callback(char *topic, byte *payload, unsigned int length) {
  Serial.print("Message arrived in topic: ");
  Serial.println(topic);
  Serial.print("Message:");
+
+ char message[length];
  for (int i = 0; i < length; i++) {
      Serial.print((char) payload[i]);
+     message[i] = (char) payload[i];
  }
  Serial.println();
+ Serial.print("Message2:");
+ Serial.print(message);
+ Serial.println();
  Serial.println("-----------------------");
+
+  if(strcmp(message,"ON") == 0)
+      {
+         Serial.print("LED ON ");
+        digitalWrite(LED,LOW);
+        digitalWrite(relay,LOW);
+      }
+  else if(strcmp(message,"OFF") == 0)
+      {
+         Serial.print("LED OFF");
+        digitalWrite(LED,HIGH);
+        digitalWrite(relay,HIGH);
+      }
+       Serial.println();
 }
 
 void loop() {
