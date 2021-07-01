@@ -1,15 +1,11 @@
 package com.iot.waterTank.configuration;
 
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +29,7 @@ public class MQTTConfig {
 	@Bean
 	public IMqttClient connectToMqttServer() throws MqttException
 	{
-		String publisherId = "JavaWebServer";
+		String publisherId = UUID.randomUUID().toString();
 		IMqttClient publisher = new MqttClient(mqtthost,publisherId);
 		
 		MqttConnectOptions options = new MqttConnectOptions();
@@ -42,6 +38,26 @@ public class MQTTConfig {
 		options.setAutomaticReconnect(true);
 		options.setCleanSession(true);
 		options.setConnectionTimeout(10);
+//		MqttCallback clientCallback = new MqttCallback() {
+//
+//             @Override
+//             public void connectionLost(Throwable cause) {
+//
+//             }
+//
+//             @Override
+//             public void messageArrived(String topic, MqttMessage message) throws Exception {
+//            	 System.out.println(message);
+//             }
+//
+//             @Override
+//             public void deliveryComplete(IMqttDeliveryToken token) {
+//
+//             }
+//         };
+//
+//        
+//		publisher.setCallback(clientCallback);
 		publisher.connect(options);
 		
 		
