@@ -10,7 +10,7 @@ const char* password = "27221020";
 //const char* password = "hode8471";
 
 
-const char *mqtt_broker = "192.168.0.115";
+const char *mqtt_broker = "192.168.0.120";
 const char *topic = "switch";
 const char *mqtt_username = "mqttuser";
 const char *mqtt_password = "mqttuser";
@@ -24,21 +24,29 @@ String payload;
 
 int LED = 2;
 int relay = 4;
+int WifiStatus = 12;
+int mqttstatus = 14;
+
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   WiFi.begin(ssid,password);
   pinMode(LED,OUTPUT);
+  pinMode(WifiStatus,OUTPUT);
   pinMode(relay,OUTPUT);
+  pinMode(mqttstatus,OUTPUT);
   digitalWrite(LED,HIGH);
-        digitalWrite(relay,HIGH);
+  digitalWrite(relay,HIGH);
+  digitalWrite(WifiStatus,HIGH);
+  digitalWrite(mqttstatus,HIGH);
  
 
   while( WiFi.status() != WL_CONNECTED){
     delay(1000);
     Serial.println("Connecting..");
     Serial.println(WiFi.status());
+     
   }
 
   client.setServer(mqtt_broker,mqtt_port);
@@ -49,6 +57,7 @@ void setup() {
    client_id += String(WiFi.macAddress());
    Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
    if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
+     
    } else {
        Serial.print("failed with state ");
        Serial.print(client.state());
@@ -93,8 +102,9 @@ void callback(char *topic, byte *payload, unsigned int length) {
 void loop() {
   // put your main code here, to run repeatedly:
    if (WiFi.status() == WL_CONNECTED) { //If Wi-Fi connected successfully 
-
+        digitalWrite(WifiStatus,HIGH);
         client.loop();
+        digitalWrite(mqttstatus,HIGH);
         delay(50);
     
    }

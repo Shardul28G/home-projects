@@ -22,7 +22,7 @@ public class Mqtt {
     private String mqtt_waterlvlsensor_topic = "waterlvlsensor";
     private String password = "mqttuser";
     private String username = "mqttuser";
-    private String mqtt_host = "tcp://192.168.0.115:1883";
+    private String mqtt_host = "tcp://192.168.0.120:1883";
 
     Context c = null;
 
